@@ -1,0 +1,29 @@
+class ActorService {
+  final Dio _dio = Dio();
+
+  Future<List<Actor>> getActors(int movieId) async {
+    try {
+      final response = await _dio.get(
+        'https://api.themoviedb.org/3/movie/$movieId/credits?api_key=API_KEY');
+      final actors = response.data['cast'] as List;
+      return actors.map((actor) => Actor.fromMap(actor)).toList();
+    } catch (e) {
+      print("Error obteniendo los actores: $e");
+      return [];
+    }
+  }
+}
+
+class Actor {
+  final String name;
+  final String profilePath;
+
+  Actor({required this.name, required this.profilePath});
+
+  factory Actor.fromMap(Map<String, dynamic> map) {
+    return Actor(
+      name: map['name'],
+      profilePath: map['profile_path'],
+    );
+  }
+}
