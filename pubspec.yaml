@@ -38,6 +38,9 @@ dependencies:
   easy_splash_screen: ^1.0.4
   day_night_switcher: ^0.2.0+1
   dio: ^5.7.0
+  youtube_player_flutter: ^9.1.1
+  shared_preferences: ^2.3.3
+  youtube_player_iframe: ^5.2.1
 
 
 dev_dependencies:

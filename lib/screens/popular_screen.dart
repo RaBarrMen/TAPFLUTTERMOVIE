@@ -34,7 +34,6 @@ class _PopularScreenState extends State<PopularScreen> {
                 final movie = snapshot.data![index];
                 return GestureDetector(
                   onTap: () {
-                    // Navegar a la pantalla de detalles
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -55,15 +54,32 @@ class _PopularScreenState extends State<PopularScreen> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            movie.title,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                            ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                movie.title,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(Icons.star, color: Colors.amber, size: 16),
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    '${movie.voteAverage} / 10',
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ],
