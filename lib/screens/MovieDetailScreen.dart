@@ -30,17 +30,16 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     );
     _loadTrailer();
     _checkFavorite();
-    _loadCast();  // Llamar a la función para obtener los actores
+    _loadCast();  
   }
 
-  // Función para extraer el ID del video desde la URL
   String? _extractYoutubeId(String url) {
     final Uri? uri = Uri.tryParse(url);
     if (uri != null) {
       if (uri.queryParameters.containsKey('v')) {
-        return uri.queryParameters['v']; // Extraer el parámetro 'v'
+        return uri.queryParameters['v'];
       } else if (uri.pathSegments.isNotEmpty) {
-        return uri.pathSegments.last; // Extraer último segmento
+        return uri.pathSegments.last; 
       }
     }
     return null;
@@ -52,7 +51,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
       print('URL del tráiler: $url');
       final videoId = _extractYoutubeId(url);
       if (videoId != null) {
-        _controller.loadVideoById(videoId: videoId); // Cargar video dinámicamente
+        _controller.loadVideoById(videoId: videoId); 
       }
     }
   }
@@ -76,7 +75,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     });
   }
 
-  // Función para cargar los actores
   void _loadCast() async {
     final cast = await ApiPopular().getCast(widget.movie.id);
     setState(() {
@@ -90,7 +88,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
       appBar: AppBar(
         title: Text(widget.movie.title),
         actions: [
-          // Botón de favoritos
           IconButton(
             icon: Icon(
               isFavorite ? Icons.favorite : Icons.favorite_border,
@@ -98,11 +95,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
             ),
             onPressed: _toggleFavorite,
           ),
-          // Botón para ir a la pantalla de películas favoritas
           IconButton(
             icon: const Icon(Icons.favorite),
             onPressed: () {
-              // Navegar a la pantalla de películas favoritas
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const FavoriteMoviesScreen()),
@@ -159,7 +154,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 ],
               ),
             ),
-            // Sección de actores
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
